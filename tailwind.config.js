@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
+      ubuntu: ['Ubuntu', 'sans-serif'],
     },
     extend: {},
   },

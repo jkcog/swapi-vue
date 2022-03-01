@@ -2,18 +2,16 @@
 <div class="flex justify-center my-12 font-mont">
         <input v-model="searchQuery" class="search-input">
 </div>
-<div  class="flex justify-center my-12">
-    <Suspense>
-        <template #default>
-            <table class="table-auto font-mont text-2xl">
-                <thead class="">
+<div class="flex justify-center my-12">
+            <table class="table">
+                <thead>
                 <tr>
-                    <th class="pr-32 mr-3 text-left">Name</th>
-                    <th class="pr-32 mr-3 text-left">Height m</th>
-                    <th class="pr-32 mr-3 text-left">Mass kg</th>
-                    <th class="pr-32 mr-3 text-left">Created</th>
-                    <th class="pr-32 mr-3 text-left">Edited</th>
-                    <th class="pr-32 mr-3 text-left">Planet</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Height (cm)</th>
+                    <th class="table-header">Mass (kg)</th>
+                    <th class="table-header">Created</th>
+                    <th class="table-header">Edited</th>
+                    <th class="table-header">Planet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,14 +20,16 @@
                 </tr>
                 </tbody>
             </table>
-        </template>
 
-        <template #fallback>
-            <circle8></circle8>
-        </template>
-    </Suspense>
+
 </div>
-    <p>Results: {{ numberOfPeople }}</p>
+        <div class="flex justify-center" v-if="numberOfPeople === 0">
+            <circle8></circle8>
+        </div>
+        <div class="mx-12 my-32" v-else>
+            <p>Results: {{ numberOfPeople }}</p>
+        </div>
+    
 
 </template>
 
@@ -40,18 +40,15 @@ import searchMixin from '../mixins/searchMixin'
 
 
 export default {
-      components: {
-    Person,
-    Circle8,
+    components: {
+        Person,
+        Circle8,
   },
     data() {
         return {
             people: [],
             peopleEndpoint: 'https://swapi.dev/api/people/',
-            planetEndpoint: 'https://swapi.dev/api/planets/',
             searchQuery: '',
-            page: 1,
-            loading: false,
         }
     },
     computed: {
@@ -63,28 +60,11 @@ export default {
          getPeople() {
                 return this.$store.dispatch('getPeople', this.peopleEndpoint);
         },
-        loadMore() {
-            this.loading = true
-            console.log('load more: ', this.$store.state.next)
-            this.$store.dispatch('getPeople', this.$store.state.next)
-            .then(() => {
-                this.loading = false
-            })
-            
-        }
     },
     async created() {
             if (!this.$store.state.people.length) {
-                this.loading = true
                 this.people = await this.getPeople()
-                this.loading = false
             }
-            
-
-        
-    },
-updated() {
-        
     },
     mixins: [searchMixin],
 }
