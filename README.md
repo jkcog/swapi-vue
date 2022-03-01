@@ -1,24 +1,17 @@
-# swapi-app
+# SWAPI Vue Application
 
-## Project setup
-```
-npm install
-```
+A Vue js application for displaying and searching through character details from the [SWAPI API](https://swapi.dev/).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<br />
 
-### Compiles and minifies for production
-```
-npm run build
-```
+This project uses Vuex for state management and is styled using Tailwind CSS.
 
-### Lints and fixes files
-```
-npm run lint
-```
+<br />
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Next Steps
+
+#### - Implement unit testing
+Implementing unit testing will make the code easier to maintain and extend.
+
+#### - Implement a fuzzy search
+Fuzzy search approximately matches strings in a way which takes into account potential misspellings. Implementing this could improve the user experience by being more forgiving of misspellings in the user input.
